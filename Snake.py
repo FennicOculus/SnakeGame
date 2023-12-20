@@ -3,18 +3,18 @@ import random
 
 
 class Snake:
-    def __init__(self, WIDTH, HEIGHT, UP, DOWN, LEFT, RIGHT, GRID_SIZE, color):
+    def __init__(self, width, height, up, down, left, right, grid_size, color):
         self.length = 1
-        self.positions = [((WIDTH // 2), (HEIGHT // 2))]
-        self.direction = random.choice([UP, DOWN, LEFT, RIGHT])
+        self.positions = [((width // 2), (height // 2))]
+        self.direction = random.choice([up, down, left, right])
         self.color = color
-        self.GRID_SIZE = GRID_SIZE
-        self.WIDTH = WIDTH
-        self.HEIGHT = HEIGHT
-        self.UP = UP
-        self.DOWN = DOWN
-        self.LEFT = LEFT
-        self.RIGHT = RIGHT
+        self.GRID_SIZE = grid_size
+        self.WIDTH = width
+        self.HEIGHT = height
+        self.UP = up
+        self.DOWN = down
+        self.LEFT = left
+        self.RIGHT = right
 
     def get_head_position(self):
         return self.positions[0]
@@ -37,4 +37,10 @@ class Snake:
 
     def render(self, surface):
         for p in self.positions:
-            pygame.draw.rect(surface, self.color, (p[0], p[1], self.GRID_SIZE, self.GRID_SIZE))
+            # Calculate the center of the grid cell
+            cell_center_x = p[0] + self.GRID_SIZE // 2
+            cell_center_y = p[1] + self.GRID_SIZE // 2
+
+            # Draw a circle in the center of the grid cell
+            pygame.draw.circle(surface, self.color, (cell_center_x, cell_center_y), self.GRID_SIZE // 2)
+
